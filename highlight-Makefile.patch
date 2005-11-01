@@ -1,0 +1,35 @@
+--- highlight-2.4.3/highlight/makefile~	2005-11-01 16:09:28.383916928 +0100
++++ highlight-2.4.3/highlight/makefile	2005-11-01 16:13:00.357692016 +0100
+@@ -2,7 +2,7 @@
+ # This file will compile the highlight binary.
+ # See INSTALL for instructions.
+ 
+-# Add -DHL_DATA_DIR=\"/your/path/\" to CFLAGS if you want to define a
++# Add -DHL_DATA_DIR=\"/your/path/\" to CXXFLAGS if you want to define a
+ # custom installation directory not listed in INSTALL.
+ # Copy *.conf, ./langDefs, ./themes amd ./indentSchemes to /your/path/.
+ # See ../makefile for the definition of ${data_dir}
+@@ -15,11 +15,11 @@
+ 
+ CXX=c++
+ 
+-CFLAGS := -O2 -Wall -pedantic -DHL_DATA_DIR=\"${HL_DATA_DIR}\"
++override CXXFLAGS += -Wall -pedantic -DHL_DATA_DIR=\"${HL_DATA_DIR}\"
+ 
+-LDFLAGS = -L/usr/lib -s
++LDFLAGS =
+ 
+-CXX_COMPILE = ${CXX} ${CFLAGS} -c
++CXX_COMPILE = ${CXX} ${CXXFLAGS} -c
+ CXX_LINK = ${CXX} ${LDFLAGS} -o highlight ${OBJECTFILES}
+ 
+ OBJECTFILES :=  main.o configurationreader.o stylecolour.o stringtools.o \
+@@ -38,7 +38,7 @@
+ 
+ ifeq ($(USE_LOCAL_GETOPT),true)
+ 	OBJECTFILES:=${OBJECTFILES} getopt.o
+-	CFLAGS:=${CFLAGS} -DUSE_LOCAL_GETOPT
++	CXXFLAGS:=${CXXFLAGS} -DUSE_LOCAL_GETOPT
+ endif
+ 
+ 
