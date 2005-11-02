@@ -1,8 +1,9 @@
 #
+# Conditional build:
 %bcond_without	apidocs # don't generate apidocs subpackage
 #
 Summary:	A source code converter to HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML
-Summary(pl):	Konwerter kodu ¼ród³owego do HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML
+Summary(pl):	Konwerter kodu ¼ród³owego do formatów HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
 Name:		highlight
 Version:	2.4.3
 Release:	0.1
@@ -12,8 +13,8 @@ Source0:	http://www.andre-simon.de/zip/%{name}-%{version}.tar.gz
 # Source0-md5:	19b0437361f84467fff11bdbeba654a0
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.andre-simon.de/
-BuildRequires:	libstdc++-devel
 %{?with_apidocs:BuildRequires:	doxygen}
+BuildRequires:	libstdc++-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define _sysconfdir /etc/highlight
@@ -27,17 +28,17 @@ the parsing database. The converter includes some features to provide
 a consistent layout of the input code.
 
 %description -l pl
-Highlight jest uniwersalnym konwerterem kodu ¼ród³owego do HTML,
-XHTML, RTF, TeX, LaTeX, XSL-FO, and XML. Wyj¶cie (X)HTML jest
+Highlight jest uniwersalnym konwerterem kodu ¼ród³owego do formatów
+HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML. Wyj¶cie (X)HTML jest
 formatowane przez kaskadowe arkusze stylów (CSS). Highlight wspiera
-100 jêzyków programistycznych i zawiera 50 kolorostycznych tematów
+100 jêzyków programowania i zawiera 50 kolorystycznych motywów
 pod¶wietlania sk³adni. Umo¿liwia ³atwe ulepszanie bazy parsowania.
 Konwerter zawiera pewne cechy zapewniaj±ce spójny uk³ad graficzny kodu
 wej¶ciowego.
 
 %package apidocs
 Summary:	API documentation for highlight - a source code converter to HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML
-Summary(pl):	Dokumentacja API highlight - konwertera kodu ¼ród³owego do HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML
+Summary(pl):	Dokumentacja API highlight - konwertera kodu ¼ród³owego do HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
 Group:		Documentation
 
 %description apidocs
@@ -45,15 +46,17 @@ API documentation for highlight - a source code converter to HTML,
 XHTML, RTF, TeX, LaTeX, XSL-FO, and XML.
 
 %description apidocs -l pl
-Dokumentacja API highlight - konwertera kodu ¼ród³owego do HTML,
-XHTML, RTF, TeX, LaTeX, XSL-FO, and XML.
+Dokumentacja API highlight - konwertera kodu ¼ród³owego do formatu
+HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML.
 
 %prep
 %setup -q
 %patch0 -p1
 
 %build
-%{__make} CXX="%{__cxx}" CXXFLAGS="%{rpmcxxflags}"
+%{__make} \
+	CXX="%{__cxx}" \
+	CXXFLAGS="%{rpmcxxflags}"
 
 %{?with_apidocs:%{__make} apidocs}
 
