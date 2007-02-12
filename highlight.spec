@@ -3,7 +3,7 @@
 %bcond_without	apidocs # don't generate apidocs subpackage
 #
 Summary:	A source code converter to HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML
-Summary(pl):	Konwerter kodu 紃骴硂wego do format體 HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
+Summary(pl.UTF-8):   Konwerter kodu 藕r贸d艂owego do format贸w HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
 Name:		highlight
 Version:	2.4.3
 Release:	0.1
@@ -27,26 +27,26 @@ includes 50 highlighting color themes. It's possible to easily enhance
 the parsing database. The converter includes some features to provide
 a consistent layout of the input code.
 
-%description -l pl
-Highlight jest uniwersalnym konwerterem kodu 紃骴硂wego do format體
-HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML. Wyj禼ie (X)HTML jest
-formatowane przez kaskadowe arkusze styl體 (CSS). Highlight wspiera
-100 j陑yk體 programowania i zawiera 50 kolorystycznych motyw體
-pod秝ietlania sk砤dni. Umo縧iwia 砤twe ulepszanie bazy parsowania.
-Konwerter zawiera pewne cechy zapewniaj眂e sp骿ny uk砤d graficzny kodu
-wej禼iowego.
+%description -l pl.UTF-8
+Highlight jest uniwersalnym konwerterem kodu 藕r贸d艂owego do format贸w
+HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML. Wyj艣cie (X)HTML jest
+formatowane przez kaskadowe arkusze styl贸w (CSS). Highlight wspiera
+100 j臋zyk贸w programowania i zawiera 50 kolorystycznych motyw贸w
+pod艣wietlania sk艂adni. Umo偶liwia 艂atwe ulepszanie bazy parsowania.
+Konwerter zawiera pewne cechy zapewniaj膮ce sp贸jny uk艂ad graficzny kodu
+wej艣ciowego.
 
 %package apidocs
 Summary:	API documentation for highlight - a source code converter to HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML
-Summary(pl):	Dokumentacja API highlight - konwertera kodu 紃骴硂wego do HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
+Summary(pl.UTF-8):   Dokumentacja API highlight - konwertera kodu 藕r贸d艂owego do HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
 Group:		Documentation
 
 %description apidocs
 API documentation for highlight - a source code converter to HTML,
 XHTML, RTF, TeX, LaTeX, XSL-FO, and XML.
 
-%description apidocs -l pl
-Dokumentacja API highlight - konwertera kodu 紃骴硂wego do formatu
+%description apidocs -l pl.UTF-8
+Dokumentacja API highlight - konwertera kodu 藕r贸d艂owego do formatu
 HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML.
 
 %prep
