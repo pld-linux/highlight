@@ -3,7 +3,7 @@
 %bcond_without	apidocs # don't generate apidocs subpackage
 #
 Summary:	A source code converter to HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML
-Summary(pl.UTF-8):   Konwerter kodu źródłowego do formatów HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
+Summary(pl.UTF-8):	Konwerter kodu źródłowego do formatów HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
 Name:		highlight
 Version:	2.4.3
 Release:	0.1
@@ -38,7 +38,7 @@ wejściowego.
 
 %package apidocs
 Summary:	API documentation for highlight - a source code converter to HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML
-Summary(pl.UTF-8):   Dokumentacja API highlight - konwertera kodu źródłowego do HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
+Summary(pl.UTF-8):	Dokumentacja API highlight - konwertera kodu źródłowego do HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
 Group:		Documentation
 
 %description apidocs
