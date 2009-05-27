@@ -1,16 +1,18 @@
 #
+# TODO:		gui subpackage (build requires qt4)
+#
 # Conditional build:
 %bcond_without	apidocs # don't generate apidocs subpackage
 #
 Summary:	A source code converter to HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML
 Summary(pl.UTF-8):	Konwerter kodu źródłowego do formatów HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
 Name:		highlight
-Version:	2.4.3
-Release:	2
+Version:	2.9
+Release:	1
 License:	GPL
 Group:		Applications/Publishing
-Source0:	http://www.andre-simon.de/zip/%{name}-%{version}.tar.gz
-# Source0-md5:	19b0437361f84467fff11bdbeba654a0
+Source0:	http://www.andre-simon.de/zip/%{name}-%{version}.tar.bz2
+# Source0-md5:	8db826438cc44ad666e9140e8f2c85c8
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.andre-simon.de/
 %{?with_apidocs:BuildRequires:	doxygen}
@@ -74,9 +76,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog README README_INDENT README_REGEX TODO examples
+%doc AUTHORS ChangeLog README README_INDENT README_LANGLIST README_REGEX TODO examples
 %lang(de) %doc README_DE
-%lang(es) %doc README_ES
 %attr(755,root,root) %{_bindir}/*
 %{_datadir}/%{name}
 %{_mandir}/man1/*

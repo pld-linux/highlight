@@ -1,7 +1,7 @@
---- highlight-2.4.3/highlight/makefile~	2005-11-01 16:09:28.383916928 +0100
-+++ highlight-2.4.3/highlight/makefile	2005-11-01 16:13:00.357692016 +0100
+--- highlight-2.9/src/makefile.orig	2009-04-23 05:32:21.000000000 +0200
++++ highlight-2.9/src/makefile	2009-05-27 18:57:01.000000000 +0200
 @@ -2,7 +2,7 @@
- # This file will compile the highlight binary.
+ # This file will compile the highlight library and binaries.
  # See INSTALL for instructions.
  
 -# Add -DHL_DATA_DIR=\"/your/path/\" to CFLAGS if you want to define a
@@ -9,27 +9,21 @@
  # custom installation directory not listed in INSTALL.
  # Copy *.conf, ./langDefs, ./themes amd ./indentSchemes to /your/path/.
  # See ../makefile for the definition of ${data_dir}
-@@ -15,11 +15,11 @@
+@@ -17,7 +17,7 @@
  
  CXX=c++
  
--CFLAGS := -O2 -Wall -pedantic -DHL_DATA_DIR=\"${HL_DATA_DIR}\"
-+override CXXFLAGS += -Wall -pedantic -DHL_DATA_DIR=\"${HL_DATA_DIR}\"
+-CFLAGS:=-O2 ${CFLAGS}
++CXXFLAGS:=-O2 ${CXXFLAGS}
  
--LDFLAGS = -L/usr/lib -s
-+LDFLAGS =
+ # Source paths
+ CORE_DIR=./core/
+@@ -42,7 +42,7 @@ endif
+ #LDFLAGS = ${LDFLAGS} -s
+ #LDFLAGS= -Wl,--as-needed
  
--CXX_COMPILE = ${CXX} ${CFLAGS} -c
-+CXX_COMPILE = ${CXX} ${CXXFLAGS} -c
- CXX_LINK = ${CXX} ${LDFLAGS} -o highlight ${OBJECTFILES}
+-CXX_COMPILE=${CXX} ${CFLAGS} -c -I ${CORE_DIR}
++CXX_COMPILE=${CXX} ${CXXFLAGS} -c -I ${CORE_DIR}
  
- OBJECTFILES :=  main.o configurationreader.o stylecolour.o stringtools.o \
-@@ -38,7 +38,7 @@
- 
- ifeq ($(USE_LOCAL_GETOPT),true)
- 	OBJECTFILES:=${OBJECTFILES} getopt.o
--	CFLAGS:=${CFLAGS} -DUSE_LOCAL_GETOPT
-+	CXXFLAGS:=${CXXFLAGS} -DUSE_LOCAL_GETOPT
- endif
- 
- 
+ # Data directories (data dir, configuration file dir)
+ CXX_DIR=-DHL_DATA_DIR=\"${HL_DATA_DIR}\" -DHL_CONFIG_DIR=\"${HL_CONFIG_DIR}\"
