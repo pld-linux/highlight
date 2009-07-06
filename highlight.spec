@@ -1,25 +1,26 @@
 #
-# TODO:		gui subpackage (build requires qt4)
-#
 # Conditional build:
 %bcond_without	apidocs # don't generate apidocs subpackage
 #
 Summary:	A source code converter to HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML
 Summary(pl.UTF-8):	Konwerter kodu źródłowego do formatów HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
 Name:		highlight
-Version:	2.9
+Version:	2.10
 Release:	1
-License:	GPL
+License:	GPL v3
 Group:		Applications/Publishing
 Source0:	http://www.andre-simon.de/zip/%{name}-%{version}.tar.bz2
-# Source0-md5:	8db826438cc44ad666e9140e8f2c85c8
+# Source0-md5:	cdb28be381d99ab24d11174082c0a4fa
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.andre-simon.de/
 %{?with_apidocs:BuildRequires:	doxygen}
 BuildRequires:	libstdc++-devel
+BuildRequires:	QtCore-devel
+BuildRequires:	QtGui-devel
+BuildRequires:	qt4-build
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define _sysconfdir /etc/highlight
+%define		_sysconfdir	/etc/highlight
 
 %description
 Highlight is a universal converter from source code to HTML, XHTML,
@@ -51,12 +52,25 @@ XHTML, RTF, TeX, LaTeX, XSL-FO, and XML.
 Dokumentacja API highlight - konwertera kodu źródłowego do formatu
 HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML.
 
+%package gui
+Summary:	GUI for highlight - a source code converter to HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML
+Summary(pl.UTF-8):	GUI do highlight - konwertera kodu źródłowego do HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
+Group:		Development/Tools
+Requires:	%{name}
+
+%description gui
+Qt4 GUI for for highlight - a source code converter to HTML, XHTML,
+RTF, TeX, LaTeX, XSL-FO, and XML.
+
 %prep
 %setup -q
 %patch0 -p1
 
 %build
 %{__make} \
+	CXX="%{__cxx}" \
+	CXXFLAGS="%{rpmcxxflags}"
+%{__make} gui \
 	CXX="%{__cxx}" \
 	CXXFLAGS="%{rpmcxxflags}"
 
@@ -68,6 +82,9 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%{__make} install-gui \
+	DESTDIR=$RPM_BUILD_ROOT
+
 # to avoid false `warning: Installed (but unpackaged) file(s) found:' - these files are packaged through %doc
 rm -fr $RPM_BUILD_ROOT/usr/share/doc/highlight
 
@@ -76,9 +93,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog README README_INDENT README_LANGLIST README_REGEX TODO examples
+%doc AUTHORS ChangeLog README README_LANGLIST README_REGEX TODO examples
 %lang(de) %doc README_DE
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/%{name}
 %{_datadir}/%{name}
 %{_mandir}/man1/*
 %dir %{_sysconfdir}
@@ -89,3 +106,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc apidocs/html/*
 %endif
+
+%files gui
+%attr(755,root,root) %{_bindir}/%{name}-gui
+%{_desktopdir}/*.desktop
+%{_pixmapsdir}/*.xpm
