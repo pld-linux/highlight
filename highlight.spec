@@ -18,6 +18,7 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	QtCore-devel
 BuildRequires:	QtGui-devel
 BuildRequires:	qt4-build
+BuildRequires:	qt4-qmake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/highlight
@@ -72,7 +73,7 @@ RTF, TeX, LaTeX, XSL-FO, and XML.
 	CXXFLAGS="%{rpmcxxflags}"
 %{__make} gui \
 	CXX="%{__cxx}" \
-	CXXFLAGS="%{rpmcxxflags}"
+	CXXFLAGS="%{rpmcxxflags} "'$(DEFINES)'
 
 %{?with_apidocs:%{__make} apidocs}
 
@@ -96,7 +97,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog README README_LANGLIST README_REGEX TODO examples
 %lang(de) %doc README_DE
 %attr(755,root,root) %{_bindir}/%{name}
-%{_datadir}/%{name}
+%dir %{_datadir}/%{name}
+%{_datadir}/%{name}/langDefs
+%{_datadir}/%{name}/themes
 %{_mandir}/man1/*
 %dir %{_sysconfdir}
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*
@@ -109,5 +112,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files gui
 %attr(755,root,root) %{_bindir}/%{name}-gui
+%dir %{_datadir}/%{name}/gui_files
+%dir %{_datadir}/%{name}/gui_files/l10n
+%lang(de) %dir %{_datadir}/%{name}/gui_files/l10n/highlight_de_DE.qm
+%lang(es) %dir %{_datadir}/%{name}/gui_files/l10n/highlight_es_ES.qm
+%{_datadir}/%{name}/gui_files/ext
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.xpm
