@@ -10,7 +10,7 @@ Release:	1
 License:	GPL v3
 Group:		Applications/Publishing
 Source0:	http://www.andre-simon.de/zip/%{name}-%{version}.tar.bz2
-# Source0-md5:	c0f9d4b2b5d1557f218d85929244f036
+# Source0-md5:	1f5d325e24f25d7d17d223c8ab3a2785
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.andre-simon.de/
 %{?with_apidocs:BuildRequires:	doxygen}
