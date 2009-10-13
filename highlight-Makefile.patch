@@ -9,16 +9,27 @@
  # custom installation directory not listed in INSTALL.
  # Copy *.conf, ./langDefs, ./themes amd ./indentSchemes to /your/path/.
  # See ../makefile for the definition of ${data_dir}
-@@ -17,7 +17,7 @@
+@@ -17,8 +17,8 @@
  
  CXX=c++
  
 -CFLAGS:=-O2 ${CFLAGS}
+-#CFLAGS:=-ggdb ${CFLAGS}
 +CXXFLAGS:=-O2 ${CXXFLAGS}
++#CXXFLAGS:=-ggdb ${CXXFLAGS}
  
- # Source paths
- CORE_DIR=./core/
-@@ -42,7 +42,7 @@ endif
+ SO_VERSION=2.13
+ 
+@@ -38,7 +38,7 @@
+ 	HL_DATA_DIR = /usr/share/highlight/
+ endif
+ ifdef PIC
+-	CFLAGS+=-fPIC
++	CXXFLAGS+=-fPIC
+ endif
+ 
+ # Do not strip by default (Mac OS X lazy pointer issues)
+@@ -48,7 +48,7 @@
  #LDFLAGS = ${LDFLAGS} -s
  #LDFLAGS= -Wl,--as-needed
  
