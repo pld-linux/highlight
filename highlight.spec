@@ -1,22 +1,22 @@
 #
 # Conditional build:
 %bcond_without	apidocs # don't generate apidocs subpackage
-#
+
 Summary:	A source code converter to HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML
 Summary(pl.UTF-8):	Konwerter kodu źródłowego do formatów HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
 Name:		highlight
 Version:	2.16
-Release:	1
+Release:	2
 License:	GPL v3
 Group:		Applications/Publishing
 Source0:	http://www.andre-simon.de/zip/%{name}-%{version}.tar.bz2
 # Source0-md5:	08f1429a6db258ab1a7eecbb4e0d44b2
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.andre-simon.de/
-%{?with_apidocs:BuildRequires:	doxygen}
-BuildRequires:	libstdc++-devel
 BuildRequires:	QtCore-devel
 BuildRequires:	QtGui-devel
+%{?with_apidocs:BuildRequires:	doxygen}
+BuildRequires:	libstdc++-devel
 BuildRequires:	qt4-build
 BuildRequires:	qt4-qmake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -44,6 +44,9 @@ wejściowego.
 Summary:	API documentation for highlight - a source code converter to HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML
 Summary(pl.UTF-8):	Dokumentacja API highlight - konwertera kodu źródłowego do HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
 Group:		Documentation
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 API documentation for highlight - a source code converter to HTML,
@@ -88,7 +91,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 # to avoid false `warning: Installed (but unpackaged) file(s) found:' - these files are packaged through %doc
-rm -fr $RPM_BUILD_ROOT/usr/share/doc/highlight
+rm -fr $RPM_BUILD_ROOT%{_docdir}/highlight
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -112,6 +115,7 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %files gui
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/%{name}-gui
 %dir %{_datadir}/%{name}/gui_files
 %dir %{_datadir}/%{name}/gui_files/l10n
