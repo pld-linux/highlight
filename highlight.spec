@@ -1,22 +1,24 @@
 #
 # Conditional build:
-%bcond_without	apidocs # don't generate apidocs subpackage
+%bcond_with	apidocs # don't generate apidocs subpackage
 
 Summary:	A source code converter to HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML
 Summary(pl.UTF-8):	Konwerter kodu źródłowego do formatów HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
 Name:		highlight
-Version:	2.16
-Release:	3
+Version:	3.30
+Release:	1
 License:	GPL v3
 Group:		Applications/Publishing
 Source0:	http://www.andre-simon.de/zip/%{name}-%{version}.tar.bz2
-# Source0-md5:	08f1429a6db258ab1a7eecbb4e0d44b2
+# Source0-md5:	3636b0db7ba0285bac4f27b34a38bf16
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.andre-simon.de/
 BuildRequires:	QtCore-devel
 BuildRequires:	QtGui-devel
+BuildRequires:	boost-devel
 %{?with_apidocs:BuildRequires:	doxygen}
 BuildRequires:	libstdc++-devel
+BuildRequires:	lua52-devel
 BuildRequires:	qt4-build
 BuildRequires:	qt4-qmake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -70,16 +72,14 @@ RTF, TeX, LaTeX, XSL-FO, and XML.
 %setup -q
 %patch0 -p1
 
-%{__rm} src/gui-qt/moc_*.cpp
-
 %build
 %{__make} \
 	CXX="%{__cxx}" \
-	CXXFLAGS="%{rpmcxxflags}"
+	CXXFLAGS="%{rpmcxxflags} -std=c++11"
 %{__make} gui \
 	QMAKE=qmake-qt4 \
 	CXX="%{__cxx}" \
-	CXXFLAGS="%{rpmcxxflags} "'$(DEFINES)'
+	CXXFLAGS="%{rpmcxxflags} -std=c++11 "'$(DEFINES)'
 
 %{?with_apidocs:%{__make} apidocs}
 
@@ -121,8 +121,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/%{name}-gui
 %dir %{_datadir}/%{name}/gui_files
 %dir %{_datadir}/%{name}/gui_files/l10n
+%lang(cs) %dir %{_datadir}/%{name}/gui_files/l10n/highlight_cs_CZ.qm
 %lang(de) %dir %{_datadir}/%{name}/gui_files/l10n/highlight_de_DE.qm
 %lang(es) %dir %{_datadir}/%{name}/gui_files/l10n/highlight_es_ES.qm
+%lang(zh) %dir %{_datadir}/%{name}/gui_files/l10n/highlight_zh_CN.qm
 %{_datadir}/%{name}/gui_files/ext
+%dir %{_datadir}/%{name}/plugins
+%{_datadir}/%{name}/plugins/*.lua
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.xpm

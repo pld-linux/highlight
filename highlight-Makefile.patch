@@ -1,5 +1,5 @@
---- highlight-2.9/src/makefile.orig	2009-04-23 05:32:21.000000000 +0200
-+++ highlight-2.9/src/makefile	2009-05-27 18:57:01.000000000 +0200
+--- highlight-3.30/src/makefile.orig	2016-07-24 23:17:13.177486879 +0200
++++ highlight-3.30/src/makefile	2016-07-24 23:18:05.876942844 +0200
 @@ -2,7 +2,7 @@
  # This file will compile the highlight library and binaries.
  # See INSTALL for instructions.
@@ -9,32 +9,71 @@
  # custom installation directory not listed in INSTALL.
  # Copy *.conf, ./langDefs, ./themes amd ./indentSchemes to /your/path/.
  # See ../makefile for the definition of ${data_dir}
-@@ -17,8 +17,8 @@
+@@ -18,10 +18,10 @@
+ QMAKE=qmake
  
- CXX=c++
- 
--CFLAGS:=-O2 ${CFLAGS}
+ # Added -std=c++11 because of auto_ptr to unique_ptr transition
+-CFLAGS:=-Wall -O2 ${CFLAGS} -DNDEBUG -std=c++11
 -#CFLAGS:=-ggdb ${CFLAGS}
-+CXXFLAGS:=-O2 ${CXXFLAGS}
++CXXFLAGS:=-Wall -O2 ${CXXFLAGS} -DNDEBUG -std=c++11
 +#CXXFLAGS:=-ggdb ${CXXFLAGS}
  
- SO_VERSION=2.13
+-CFLAGS_DILU=-fno-strict-aliasing
++CXXFLAGS_DILU=-fno-strict-aliasing
  
-@@ -38,7 +38,7 @@
- 	HL_DATA_DIR = /usr/share/highlight/
+ SO_VERSION=3.30
+ 
+@@ -38,10 +38,10 @@
+ # If Lua 5.2 is not default on your system yet you have to
+ # use lua5.1 in the pkg-config calls
+ 
+-LUA_CFLAGS=$(shell pkg-config --cflags lua)
++LUA_CFLAGS=$(shell pkg-config --cflags lua5.2)
+ 
+ # default lua lib
+-LUA_LIBS=$(shell pkg-config --libs lua)
++LUA_LIBS=$(shell pkg-config --libs lua5.2)
+ 
+ # luajit lib
+ # LUA_LIBS=$(shell pkg-config --libs luajit)
+@@ -62,7 +62,7 @@
  endif
+ 
  ifdef PIC
 -	CFLAGS+=-fPIC
 +	CXXFLAGS+=-fPIC
  endif
  
- # Do not strip by default (Mac OS X lazy pointer issues)
-@@ -48,7 +48,7 @@
+ LDFLAGS = -ldl
+@@ -72,7 +72,7 @@
  #LDFLAGS = ${LDFLAGS} -s
  #LDFLAGS= -Wl,--as-needed
  
--CXX_COMPILE=${CXX} ${CFLAGS} -c -I ${CORE_DIR}
-+CXX_COMPILE=${CXX} ${CXXFLAGS} -c -I ${CORE_DIR}
+-CXX_COMPILE=${CXX} ${CFLAGS} -c -I ${INCLUDE_DIR} ${LUA_CFLAGS}
++CXX_COMPILE=${CXX} ${CXXFLAGS} -c -I ${INCLUDE_DIR} ${LUA_CFLAGS}
  
  # Data directories (data dir, configuration file dir)
  CXX_DIR=-DHL_DATA_DIR=\"${HL_DATA_DIR}\" -DHL_CONFIG_DIR=\"${HL_CONFIG_DIR}\"
+@@ -234,7 +234,7 @@
+ LuaUtils.o: ${DILU_DIR}LuaUtils.cpp
+ 	${CXX_COMPILE} ${DILU_DIR}LuaUtils.cpp
+ LuaValue.o: ${DILU_DIR}LuaValue.cpp
+-	${CXX_COMPILE} ${CFLAGS_DILU} ${DILU_DIR}LuaValue.cpp
++	${CXX_COMPILE} ${CXXFLAGS_DILU} ${DILU_DIR}LuaValue.cpp
+ LuaVariable.o: ${DILU_DIR}LuaVariable.cpp
+ 	${CXX_COMPILE} ${DILU_DIR}LuaVariable.cpp
+ LuaWrappers.o: ${DILU_DIR}LuaWrappers.cpp
+--- highlight-3.30/src/gui-qt/highlight.pro.orig	2016-07-24 23:21:32.954798546 +0200
++++ highlight-3.30/src/gui-qt/highlight.pro	2016-07-24 23:21:49.861289760 +0200
+@@ -35,9 +35,9 @@
+ unix {
+ 	DESTDIR = ../
+     LIBS += -L.. -lhighlight
+-    LIBS += -llua
++    LIBS += -llua5.2
+     CONFIG += link_pkgconfig
+-    PKGCONFIG += lua
++    PKGCONFIG += lua5.2
+ 
+     # to make it run within Qt Creator
+     !contains(DEFINES, DATA_DIR) {
