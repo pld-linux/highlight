@@ -1,5 +1,6 @@
---- highlight-3.30/src/makefile.orig	2016-07-24 23:17:13.177486879 +0200
-+++ highlight-3.30/src/makefile	2016-07-24 23:18:05.876942844 +0200
+diff -urN highlight-3.34.orig/src/makefile highlight-3.34/src/makefile
+--- highlight-3.34.orig/src/makefile	2017-01-24 22:56:25.702768453 +0100
++++ highlight-3.34/src/makefile	2017-01-24 22:57:44.332773964 +0100
 @@ -2,7 +2,7 @@
  # This file will compile the highlight library and binaries.
  # See INSTALL for instructions.
@@ -9,7 +10,7 @@
  # custom installation directory not listed in INSTALL.
  # Copy *.conf, ./langDefs, ./themes amd ./indentSchemes to /your/path/.
  # See ../makefile for the definition of ${data_dir}
-@@ -18,10 +18,10 @@
+@@ -19,10 +19,10 @@
  QMAKE=qmake
  
  # Added -std=c++11 because of auto_ptr to unique_ptr transition
@@ -23,7 +24,7 @@
  
  SO_VERSION=3.30
  
-@@ -38,10 +38,10 @@
+@@ -39,10 +39,10 @@
  # If Lua 5.2 is not default on your system yet you have to
  # use lua5.1 in the pkg-config calls
  
@@ -36,7 +37,7 @@
  
  # luajit lib
  # LUA_LIBS=$(shell pkg-config --libs luajit)
-@@ -62,7 +62,7 @@
+@@ -63,7 +63,7 @@
  endif
  
  ifdef PIC
@@ -45,7 +46,7 @@
  endif
  
  LDFLAGS = -ldl
-@@ -72,7 +72,7 @@
+@@ -73,7 +73,7 @@
  #LDFLAGS = ${LDFLAGS} -s
  #LDFLAGS= -Wl,--as-needed
  
@@ -54,7 +55,7 @@
  
  # Data directories (data dir, configuration file dir)
  CXX_DIR=-DHL_DATA_DIR=\"${HL_DATA_DIR}\" -DHL_CONFIG_DIR=\"${HL_CONFIG_DIR}\"
-@@ -234,7 +234,7 @@
+@@ -235,7 +235,7 @@
  LuaUtils.o: ${DILU_DIR}LuaUtils.cpp
  	${CXX_COMPILE} ${DILU_DIR}LuaUtils.cpp
  LuaValue.o: ${DILU_DIR}LuaValue.cpp
@@ -63,9 +64,10 @@
  LuaVariable.o: ${DILU_DIR}LuaVariable.cpp
  	${CXX_COMPILE} ${DILU_DIR}LuaVariable.cpp
  LuaWrappers.o: ${DILU_DIR}LuaWrappers.cpp
---- highlight-3.30/src/gui-qt/highlight.pro.orig	2016-07-24 23:21:32.954798546 +0200
-+++ highlight-3.30/src/gui-qt/highlight.pro	2016-07-24 23:21:49.861289760 +0200
-@@ -35,9 +35,9 @@
+diff -urN highlight-3.34.orig/src/gui-qt/highlight.pro highlight-3.34/src/gui-qt/highlight.pro
+--- highlight-3.34.orig/src/gui-qt/highlight.pro	2017-01-24 22:56:25.702768453 +0100
++++ highlight-3.34/src/gui-qt/highlight.pro	2017-01-24 22:58:08.419208074 +0100
+@@ -38,9 +38,9 @@
  unix {
  	DESTDIR = ../
      LIBS += -L.. -lhighlight
