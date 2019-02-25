@@ -5,22 +5,23 @@
 Summary:	A source code converter to HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML
 Summary(pl.UTF-8):	Konwerter kodu źródłowego do formatów HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
 Name:		highlight
-Version:	3.34
+Version:	3.49
 Release:	1
 License:	GPL v3
 Group:		Applications/Publishing
 Source0:	http://www.andre-simon.de/zip/%{name}-%{version}.tar.bz2
-# Source0-md5:	6c886515231f5c16eca991a736eefe6e
+# Source0-md5:	ea39fb9f562156efa35e4de586909d6a
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.andre-simon.de/
-BuildRequires:	QtCore-devel
-BuildRequires:	QtGui-devel
+BuildRequires:	Qt5Core-devel
+BuildRequires:	Qt5Gui-devel
+BuildRequires:	Qt5Widgets-devel
 BuildRequires:	boost-devel
 %{?with_apidocs:BuildRequires:	doxygen}
 BuildRequires:	libstdc++-devel
-BuildRequires:	lua52-devel
-BuildRequires:	qt4-build
-BuildRequires:	qt4-qmake
+BuildRequires:	lua53-devel
+BuildRequires:	qt5-build
+BuildRequires:	qt5-qmake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/highlight
@@ -77,7 +78,7 @@ RTF, TeX, LaTeX, XSL-FO, and XML.
 	CXX="%{__cxx}" \
 	CXXFLAGS="%{rpmcxxflags} -std=c++11"
 %{__make} gui \
-	QMAKE=qmake-qt4 \
+	QMAKE=qmake-qt5 \
 	CXX="%{__cxx}" \
 	CXXFLAGS="%{rpmcxxflags} -std=c++11 "'$(DEFINES)'
 
@@ -100,13 +101,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog README README_LANGLIST README_REGEX TODO examples
-%lang(de) %doc README_DE
+%doc AUTHORS ChangeLog.adoc README.adoc README_LANGLIST.adoc README_PLUGINS.adoc README_REGEX.adoc extras
+%lang(de) %doc README_DE.adoc
 %attr(755,root,root) %{_bindir}/%{name}
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/langDefs
 %{_datadir}/%{name}/themes
-%{_mandir}/man1/*
+%{_mandir}/man1/highlight.1*
+%{_mandir}/man5/filetypes.conf.5*
 %dir %{_sysconfdir}
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*
 
@@ -121,9 +123,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/%{name}-gui
 %dir %{_datadir}/%{name}/gui_files
 %dir %{_datadir}/%{name}/gui_files/l10n
+%lang(bg) %dir %{_datadir}/%{name}/gui_files/l10n/highlight_bg_BG.qm
 %lang(cs) %dir %{_datadir}/%{name}/gui_files/l10n/highlight_cs_CZ.qm
 %lang(de) %dir %{_datadir}/%{name}/gui_files/l10n/highlight_de_DE.qm
 %lang(es) %dir %{_datadir}/%{name}/gui_files/l10n/highlight_es_ES.qm
+%lang(fr) %dir %{_datadir}/%{name}/gui_files/l10n/highlight_fr_FR.qm
+%lang(it) %dir %{_datadir}/%{name}/gui_files/l10n/highlight_it_IT.qm
 %lang(zh) %dir %{_datadir}/%{name}/gui_files/l10n/highlight_zh_CN.qm
 %{_datadir}/%{name}/gui_files/ext
 %dir %{_datadir}/%{name}/plugins
