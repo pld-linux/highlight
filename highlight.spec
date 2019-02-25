@@ -6,7 +6,7 @@ Summary:	A source code converter to HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XM
 Summary(pl.UTF-8):	Konwerter kodu źródłowego do formatów HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
 Name:		highlight
 Version:	3.49
-Release:	1
+Release:	2
 License:	GPL v3
 Group:		Applications/Publishing
 Source0:	http://www.andre-simon.de/zip/%{name}-%{version}.tar.bz2
@@ -79,8 +79,7 @@ RTF, TeX, LaTeX, XSL-FO, and XML.
 	CXXFLAGS="%{rpmcxxflags} -std=c++11"
 %{__make} gui \
 	QMAKE=qmake-qt5 \
-	CXX="%{__cxx}" \
-	CXXFLAGS="%{rpmcxxflags} -std=c++11 "'$(DEFINES)'
+	CXX="%{__cxx}"
 
 %{?with_apidocs:%{__make} apidocs}
 
