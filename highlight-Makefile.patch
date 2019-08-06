@@ -10,19 +10,23 @@ diff -urN highlight-3.34.orig/src/makefile highlight-3.34/src/makefile
  # custom installation directory not listed in INSTALL.
  # Copy *.conf, ./langDefs, ./themes amd ./indentSchemes to /your/path/.
  # See ../makefile for the definition of ${data_dir}
-@@ -19,10 +19,10 @@
+@@ -19,13 +19,13 @@
  QMAKE=qmake
  
  # Added -std=c++11 because of auto_ptr to unique_ptr transition
--CFLAGS:=-Wall -O2 ${CFLAGS} -DNDEBUG -std=c++11
--#CFLAGS:=-ggdb ${CFLAGS} -std=c++11
-+CXXFLAGS:=-Wall -O2 ${CXXFLAGS} -DNDEBUG -std=c++11
-+#CXXFLAGS:=-ggdb ${CXXFLAGS} -std=c++11
+-CFLAGS:=-Wall -O2 ${CFLAGS} -DNDEBUG -std=c++11 -D_FILE_OFFSET_BITS=64
++CXXFLAGS:=-Wall -O2 ${CFLAGS} -DNDEBUG -std=c++11 -D_FILE_OFFSET_BITS=64
+ 
+-#CFLAGS:= -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -fasynchronous-unwind-tables -fstack-clash-protection
++#CXXFLAGS:= -fPIC -O2 -g -pipe -Wall -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -Wp,-D_GLIBCXX_ASSERTIONS -fexceptions -fstack-protector-strong -grecord-gcc-switches -fasynchronous-unwind-tables -fstack-clash-protection
+ 
+-#CFLAGS:=-ggdb -O0 ${CFLAGS} -std=c++11
++#CXXFLAGS:=-ggdb -O0 ${CFLAGS} -std=c++11
  
 -CFLAGS_DILU=-fno-strict-aliasing
 +CXXFLAGS_DILU=-fno-strict-aliasing
  
- SO_VERSION=3.49
+ SO_VERSION=3.53
  
 @@ -63,7 +63,7 @@
  endif
