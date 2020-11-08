@@ -122,13 +122,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/%{name}-gui
 %dir %{_datadir}/%{name}/gui_files
 %dir %{_datadir}/%{name}/gui_files/l10n
-%lang(bg) %dir %{_datadir}/%{name}/gui_files/l10n/highlight_bg_BG.qm
-%lang(cs) %dir %{_datadir}/%{name}/gui_files/l10n/highlight_cs_CZ.qm
-%lang(de) %dir %{_datadir}/%{name}/gui_files/l10n/highlight_de_DE.qm
-%lang(es) %dir %{_datadir}/%{name}/gui_files/l10n/highlight_es_ES.qm
-%lang(fr) %dir %{_datadir}/%{name}/gui_files/l10n/highlight_fr_FR.qm
-%lang(it) %dir %{_datadir}/%{name}/gui_files/l10n/highlight_it_IT.qm
-%lang(zh) %dir %{_datadir}/%{name}/gui_files/l10n/highlight_zh_CN.qm
+%lang(bg) %{_datadir}/%{name}/gui_files/l10n/highlight_bg_BG.qm
+%lang(cs) %{_datadir}/%{name}/gui_files/l10n/highlight_cs_CZ.qm
+%lang(de) %{_datadir}/%{name}/gui_files/l10n/highlight_de_DE.qm
+%lang(es) %{_datadir}/%{name}/gui_files/l10n/highlight_es_ES.qm
+%lang(fr) %{_datadir}/%{name}/gui_files/l10n/highlight_fr_FR.qm
+%lang(it) %{_datadir}/%{name}/gui_files/l10n/highlight_it_IT.qm
+%lang(zh) %{_datadir}/%{name}/gui_files/l10n/highlight_zh_CN.qm
 %{_datadir}/%{name}/gui_files/ext
 %dir %{_datadir}/%{name}/plugins
 %{_datadir}/%{name}/plugins/*.lua
