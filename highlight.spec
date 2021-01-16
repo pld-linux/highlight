@@ -22,6 +22,7 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	lua53-devel
 BuildRequires:	qt5-build
 BuildRequires:	qt5-qmake
+BuildRequires:	rpmbuild(macros) >= 1.752
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/highlight
@@ -47,9 +48,7 @@ wejściowego.
 Summary:	API documentation for highlight - a source code converter to HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML
 Summary(pl.UTF-8):	Dokumentacja API highlight - konwertera kodu źródłowego do HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
 Group:		Documentation
-%if "%{_rpmversion}" >= "5"
-BuildArch:	noarch
-%endif
+%{?noarchpackage}
 
 %description apidocs
 API documentation for highlight - a source code converter to HTML,
