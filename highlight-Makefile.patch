@@ -11,9 +11,9 @@ diff -urN highlight-3.34.orig/src/makefile highlight-3.34/src/makefile
  # Copy *.conf, ./langDefs, ./themes amd ./indentSchemes to /your/path/.
  # See ../makefile for the definition of ${data_dir}
 @@ -19,13 +19,13 @@
- QMAKE=qmake
  
- # Added -std=c++11 because of auto_ptr to unique_ptr transition
+ QMAKE ?= qmake
+ 
 -CFLAGS:=-Wall -O2 ${CFLAGS} -DNDEBUG -std=c++11 -D_FILE_OFFSET_BITS=64
 +CXXFLAGS:=-Wall -O2 ${CFLAGS} -DNDEBUG -std=c++11 -D_FILE_OFFSET_BITS=64
  
@@ -26,7 +26,7 @@ diff -urN highlight-3.34.orig/src/makefile highlight-3.34/src/makefile
 -CFLAGS_DILU=-fno-strict-aliasing
 +CXXFLAGS_DILU=-fno-strict-aliasing
  
- SO_VERSION=3.53
+ SO_VERSION=3.60
  
 @@ -63,7 +63,7 @@
  endif

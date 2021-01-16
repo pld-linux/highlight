@@ -5,12 +5,12 @@
 Summary:	A source code converter to HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML
 Summary(pl.UTF-8):	Konwerter kodu źródłowego do formatów HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
 Name:		highlight
-Version:	3.58
+Version:	3.60
 Release:	1
 License:	GPL v3
 Group:		Applications/Publishing
 Source0:	http://www.andre-simon.de/zip/%{name}-%{version}.tar.bz2
-# Source0-md5:	06d9b1070ee9eed48a3769815eb8204e
+# Source0-md5:	33f7f5548ac86e18a39b93fbefbe7e5d
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.andre-simon.de/
 BuildRequires:	Qt5Core-devel
@@ -64,6 +64,8 @@ Summary:	GUI for highlight - a source code converter to HTML, XHTML, RTF, TeX, L
 Summary(pl.UTF-8):	GUI do highlight - konwertera kodu źródłowego do HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
 Group:		Development/Tools
 Requires:	%{name}
+Requires(post,postun):	gtk-update-icon-cache
+Requires:	hicolor-icon-theme
 
 %description gui
 Qt4 GUI for for highlight - a source code converter to HTML, XHTML,
@@ -97,6 +99,12 @@ rm -fr $RPM_BUILD_ROOT%{_docdir}/highlight
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post gui
+%update_icon_cache hicolor
+
+%postun gui
+%update_icon_cache hicolor
 
 %files
 %defattr(644,root,root,755)
@@ -133,4 +141,4 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/%{name}/plugins
 %{_datadir}/%{name}/plugins/*.lua
 %{_desktopdir}/*.desktop
-%{_pixmapsdir}/*.xpm
+%{_iconsdir}/hicolor/*x*/apps/highlight.png
