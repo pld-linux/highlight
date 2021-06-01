@@ -1,6 +1,7 @@
 #
 # Conditional build:
 %bcond_with	apidocs # don't generate apidocs subpackage
+%bcond_without	gui # don't build Qt GUI tool
 
 Summary:	A source code converter to HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML
 Summary(pl.UTF-8):	Konwerter kodu źródłowego do formatów HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
@@ -13,16 +14,18 @@ Source0:	http://www.andre-simon.de/zip/%{name}-%{version}.tar.bz2
 # Source0-md5:	33f7f5548ac86e18a39b93fbefbe7e5d
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.andre-simon.de/
-BuildRequires:	Qt5Core-devel
-BuildRequires:	Qt5Gui-devel
-BuildRequires:	Qt5Widgets-devel
 BuildRequires:	boost-devel
 %{?with_apidocs:BuildRequires:	doxygen}
 BuildRequires:	libstdc++-devel
 BuildRequires:	lua53-devel
+BuildRequires:	rpmbuild(macros) >= 1.752
+%if %{with gui}
+BuildRequires:	Qt5Core-devel
+BuildRequires:	Qt5Gui-devel
+BuildRequires:	Qt5Widgets-devel
 BuildRequires:	qt5-build
 BuildRequires:	qt5-qmake
-BuildRequires:	rpmbuild(macros) >= 1.752
+%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/highlight
@@ -78,9 +81,11 @@ RTF, TeX, LaTeX, XSL-FO, and XML.
 %{__make} \
 	CXX="%{__cxx}" \
 	CXXFLAGS="%{rpmcxxflags} -std=c++11"
+%if %{with gui}
 %{__make} gui \
 	QMAKE=qmake-qt5 \
 	CXX="%{__cxx}"
+%endif
 
 %{?with_apidocs:%{__make} apidocs}
 
@@ -90,8 +95,10 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%if %{with gui}
 %{__make} install-gui \
 	DESTDIR=$RPM_BUILD_ROOT
+%endif
 
 # to avoid false `warning: Installed (but unpackaged) file(s) found:' - these files are packaged through %doc
 rm -fr $RPM_BUILD_ROOT%{_docdir}/highlight
@@ -124,6 +131,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc apidocs/html/*
 %endif
 
+%if %{with gui}
 %files gui
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/%{name}-gui
@@ -141,3 +149,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/plugins/*.lua
 %{_desktopdir}/*.desktop
 %{_iconsdir}/hicolor/*x*/apps/highlight.png
+%endif
