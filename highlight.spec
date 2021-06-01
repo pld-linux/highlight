@@ -119,6 +119,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/%{name}
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/langDefs
+%dir %{_datadir}/%{name}/plugins
+%{_datadir}/%{name}/plugins/*.lua
 %{_datadir}/%{name}/themes
 %{_mandir}/man1/highlight.1*
 %{_mandir}/man5/filetypes.conf.5*
@@ -145,8 +147,6 @@ rm -rf $RPM_BUILD_ROOT
 %lang(it) %{_datadir}/%{name}/gui_files/l10n/highlight_it_IT.qm
 %lang(zh) %{_datadir}/%{name}/gui_files/l10n/highlight_zh_CN.qm
 %{_datadir}/%{name}/gui_files/ext
-%dir %{_datadir}/%{name}/plugins
-%{_datadir}/%{name}/plugins/*.lua
 %{_desktopdir}/*.desktop
 %{_iconsdir}/hicolor/*x*/apps/highlight.png
 %endif
