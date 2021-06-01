@@ -8,7 +8,7 @@ diff -urN highlight-3.34.orig/src/makefile highlight-3.34/src/makefile
 -# Add -DHL_DATA_DIR=\"/your/path/\" to CFLAGS if you want to define a
 +# Add -DHL_DATA_DIR=\"/your/path/\" to CXXFLAGS if you want to define a
  # custom installation directory not listed in INSTALL.
- # Copy *.conf, ./langDefs, ./themes amd ./indentSchemes to /your/path/.
+ # Copy *.conf, ./langDefs, ./themes and ./plugins to /your/path/.
  # See ../makefile for the definition of ${data_dir}
 @@ -19,13 +19,13 @@
  
@@ -60,7 +60,7 @@ diff -urN highlight-3.34.orig/src/gui-qt/highlight.pro highlight-3.34/src/gui-qt
 +++ highlight-3.34/src/gui-qt/highlight.pro	2017-01-24 22:58:08.419208074 +0100
 @@ -38,9 +38,9 @@
  unix {
- 	DESTDIR = ../
+     DESTDIR = ../
      LIBS += -L.. -lhighlight
 -    LIBS += -llua
 +    LIBS += -llua5.3
@@ -69,4 +69,4 @@ diff -urN highlight-3.34.orig/src/gui-qt/highlight.pro highlight-3.34/src/gui-qt
 +    PKGCONFIG += lua5.3
  
      # to make it run within Qt Creator
-     !contains(DEFINES, DATA_DIR) {
+     !contains(DEFINES, DATA_DIR.*) {
