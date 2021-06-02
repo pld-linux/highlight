@@ -17,7 +17,8 @@ URL:		http://www.andre-simon.de/
 BuildRequires:	boost-devel
 %{?with_apidocs:BuildRequires:	doxygen}
 BuildRequires:	libstdc++-devel
-BuildRequires:	lua53-devel
+BuildRequires:	lua-devel >= 5.3
+BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.752
 %if %{with gui}
 BuildRequires:	Qt5Core-devel
@@ -80,7 +81,8 @@ RTF, TeX, LaTeX, XSL-FO, and XML.
 %build
 %{__make} \
 	CXX="%{__cxx}" \
-	CXXFLAGS="%{rpmcxxflags} -std=c++11"
+	CXXFLAGS="%{rpmcxxflags} -std=c++11" \
+	LUA_PKG_NAME="lua"
 %if %{with gui}
 %{__make} gui \
 	QMAKE=qmake-qt5 \

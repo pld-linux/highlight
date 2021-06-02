@@ -55,18 +55,3 @@ diff -urN highlight-3.34.orig/src/makefile highlight-3.34/src/makefile
  LuaVariable.o: ${DILU_DIR}LuaVariable.cpp
  	${CXX_COMPILE} ${DILU_DIR}LuaVariable.cpp
  LuaWrappers.o: ${DILU_DIR}LuaWrappers.cpp
-diff -urN highlight-3.34.orig/src/gui-qt/highlight.pro highlight-3.34/src/gui-qt/highlight.pro
---- highlight-3.34.orig/src/gui-qt/highlight.pro	2017-01-24 22:56:25.702768453 +0100
-+++ highlight-3.34/src/gui-qt/highlight.pro	2017-01-24 22:58:08.419208074 +0100
-@@ -38,9 +38,9 @@
- unix {
-     DESTDIR = ../
-     LIBS += -L.. -lhighlight
--    LIBS += -llua
-+    LIBS += -llua5.3
-     CONFIG += link_pkgconfig
--    PKGCONFIG += lua
-+    PKGCONFIG += lua5.3
- 
-     # to make it run within Qt Creator
-     !contains(DEFINES, DATA_DIR.*) {
