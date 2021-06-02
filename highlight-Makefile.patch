@@ -26,7 +26,7 @@ diff -urN highlight-3.34.orig/src/makefile highlight-3.34/src/makefile
 -CFLAGS_DILU=-fno-strict-aliasing
 +CXXFLAGS_DILU=-fno-strict-aliasing
  
- SO_VERSION=3.60
+ SO_VERSION=4.0
  
 @@ -63,7 +63,7 @@
  endif
