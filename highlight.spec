@@ -19,6 +19,7 @@ BuildRequires:	boost-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	lua-devel >= 5.3
 BuildRequires:	pkgconfig
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.752
 %if %{with gui}
 BuildRequires:	Qt5Core-devel
