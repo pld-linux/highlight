@@ -6,12 +6,12 @@
 Summary:	A source code converter to HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML
 Summary(pl.UTF-8):	Konwerter kodu źródłowego do formatów HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
 Name:		highlight
-Version:	4.2
+Version:	4.4
 Release:	1
 License:	GPL v3
 Group:		Applications/Publishing
 Source0:	http://www.andre-simon.de/zip/%{name}-%{version}.tar.bz2
-# Source0-md5:	bb325c237ed1175e23acac55f2106a7c
+# Source0-md5:	e61056f9cfe5f865ea7f87c74f05d22f
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.andre-simon.de/
 BuildRequires:	boost-devel
@@ -74,6 +74,36 @@ Requires:	hicolor-icon-theme
 %description gui
 Qt4 GUI for for highlight - a source code converter to HTML, XHTML,
 RTF, TeX, LaTeX, XSL-FO, and XML.
+
+%package -n bash-completion-highlight
+Summary:	Bash completion for highlight
+Group:		Applications/Shells
+Requires:	%{name} = %{version}-%{release}
+Requires:	bash-completion >= 1:2.0
+BuildArch:	noarch
+
+%description -n bash-completion-highlight
+Bash completion for highlight.
+
+%package -n fish-completion-highlight
+Summary:	fish-completion for highlight
+Group:		Applications/Shells
+Requires:	%{name} = %{version}-%{release}
+Requires:	fish
+BuildArch:	noarch
+
+%description -n fish-completion-highlight
+fish-completion for highlight.
+
+%package -n zsh-completion-highlight
+Summary:	ZSH completion for highlight
+Group:		Applications/Shells
+Requires:	%{name} = %{version}-%{release}
+Requires:	zsh
+BuildArch:	noarch
+
+%description -n zsh-completion-highlight
+ZSH completion for highlight.
 
 %prep
 %setup -q
@@ -148,8 +178,21 @@ rm -rf $RPM_BUILD_ROOT
 %lang(es) %{_datadir}/%{name}/gui_files/l10n/highlight_es_ES.qm
 %lang(fr) %{_datadir}/%{name}/gui_files/l10n/highlight_fr_FR.qm
 %lang(it) %{_datadir}/%{name}/gui_files/l10n/highlight_it_IT.qm
+%lang(ja) %{_datadir}/%{name}/gui_files/l10n/highlight_ja_JP.qm
 %lang(zh) %{_datadir}/%{name}/gui_files/l10n/highlight_zh_CN.qm
 %{_datadir}/%{name}/gui_files/ext
 %{_desktopdir}/*.desktop
 %{_iconsdir}/hicolor/*x*/apps/highlight.png
 %endif
+
+%files -n bash-completion-highlight
+%defattr(644,root,root,755)
+%{bash_compdir}/highlight
+
+%files -n fish-completion-highlight
+%defattr(644,root,root,755)
+%{fish_compdir}/highlight.fish
+
+%files -n zsh-completion-highlight
+%defattr(644,root,root,755)
+%{zsh_compdir}/_highlight

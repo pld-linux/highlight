@@ -36,7 +36,7 @@ diff -urN highlight-3.34.orig/src/makefile highlight-3.34/src/makefile
 +	CXXFLAGS+=-fPIC
  endif
  
- LDFLAGS = -ldl
+ ifneq ($(OS), Windows_NT)
 @@ -73,7 +73,7 @@
  #LDFLAGS = ${LDFLAGS} -s
  #LDFLAGS= -Wl,--as-needed
