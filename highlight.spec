@@ -68,6 +68,7 @@ Summary:	GUI for highlight - a source code converter to HTML, XHTML, RTF, TeX, L
 Summary(pl.UTF-8):	GUI do highlight - konwertera kodu źródłowego do HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
 Group:		Development/Tools
 Requires:	%{name}
+Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
 
@@ -141,9 +142,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %post gui
 %update_icon_cache hicolor
+%update_desktop_database_post
 
 %postun gui
 %update_icon_cache hicolor
+%update_desktop_database_postun
 
 %files
 %defattr(644,root,root,755)
