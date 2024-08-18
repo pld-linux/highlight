@@ -6,17 +6,17 @@
 Summary:	A source code converter to HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML
 Summary(pl.UTF-8):	Konwerter kodu źródłowego do formatów HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
 Name:		highlight
-Version:	4.10
+Version:	4.13
 Release:	1
 License:	GPL v3
 Group:		Applications/Publishing
 Source0:	http://www.andre-simon.de/zip/%{name}-%{version}.tar.bz2
-# Source0-md5:	187a16136f7aa4310e57eecb994b7ac4
+# Source0-md5:	25e6aef8901eb5cf555f36be63ce502e
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.andre-simon.de/
 BuildRequires:	boost-devel
 %{?with_apidocs:BuildRequires:	doxygen}
-BuildRequires:	libstdc++-devel
+BuildRequires:	libstdc++-devel >= 6:8
 BuildRequires:	lua-devel >= 5.3
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
@@ -113,7 +113,7 @@ ZSH completion for highlight.
 %build
 %{__make} \
 	CXX="%{__cxx}" \
-	CXXFLAGS="%{rpmcxxflags} -std=c++11" \
+	CXXFLAGS="%{rpmcxxflags} -std=c++17" \
 	LUA_PKG_NAME="lua"
 %if %{with gui}
 %{__make} gui \
