@@ -6,12 +6,12 @@
 Summary:	A source code converter to HTML, XHTML, RTF, TeX, LaTeX, XSL-FO, and XML
 Summary(pl.UTF-8):	Konwerter kodu źródłowego do formatów HTML, XHTML, RTF, TeX, LaTeX, XSL-FO oraz XML
 Name:		highlight
-Version:	4.16
+Version:	4.17
 Release:	1
 License:	GPL v3
 Group:		Applications/Publishing
 Source0:	http://www.andre-simon.de/zip/%{name}-%{version}.tar.bz2
-# Source0-md5:	56530aebcc69edbde9ea1a8b9e95d919
+# Source0-md5:	aeb15f1f580d6f3263483a577915eb89
 Patch0:		%{name}-Makefile.patch
 URL:		http://www.andre-simon.de/
 BuildRequires:	boost-devel
